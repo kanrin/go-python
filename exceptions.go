@@ -95,8 +95,8 @@ func PyErr_SetObject(typ, value *PyObject) {
 // Return value: Always NULL.
 // This function sets the error indicator and returns NULL. exception should be a Python exception class. The format and subsequent parameters help format the error message; they have the same meaning and values as in PyString_FromFormat().
 func PyErr_Format(exception *PyObject, format string, args ...interface{}) *PyObject {
-	//FIXME
-	panic("not implemented")
+	C.PyErr_FormatError()
+	return Py_None
 }
 
 // void PyErr_SetNone(PyObject *type)
@@ -115,7 +115,7 @@ func PyErr_BadArgument() bool {
 // Return value: Always NULL.
 // This is a shorthand for PyErr_SetNone(PyExc_MemoryError); it returns NULL so an object allocation function can write return PyErr_NoMemory(); when it runs out of memory.
 func PyErr_NoMemory() *PyObject {
-	//FIXME is this the right thing to do ?
+	// FIXME is this the right thing to do ?
 	//      should we integrate better with go panic/recover ?
 	return togo(C.PyErr_NoMemory())
 }
@@ -124,7 +124,7 @@ func PyErr_NoMemory() *PyObject {
 // Return value: Always NULL.
 // This is a convenience function to raise an exception when a C library function has returned an error and set the C variable errno. It constructs a tuple object whose first item is the integer errno value and whose second item is the corresponding error message (gotten from strerror()), and then calls PyErr_SetObject(type, object). On Unix, when the errno value is EINTR, indicating an interrupted system call, this calls PyErr_CheckSignals(), and if that set the error indicator, leaves it set to that. The function always returns NULL, so a wrapper function around a system call can write return PyErr_SetFromErrno(type); when the system call returns an error.
 func PyErr_SetFromErrno(typ *PyObject) *PyObject {
-	//FIXME is this the right thing to do ?
+	// FIXME is this the right thing to do ?
 	//      should we integrate better with go panic/recover ?
 	return togo(C.PyErr_SetFromErrno(topy(typ)))
 }
@@ -135,7 +135,7 @@ func PyErr_SetFromErrno(typ *PyObject) *PyObject {
 func PyErr_SetFromErrnoWithFilename(typ *PyObject, filename string) *PyObject {
 	c_filename := C.CString(filename)
 	defer C.free(unsafe.Pointer(c_filename))
-	//FIXME is this the right thing to do ?
+	// FIXME is this the right thing to do ?
 	//      should we integrate better with go panic/recover ?
 	return togo(C.PyErr_SetFromErrnoWithFilename(topy(typ), c_filename))
 }
@@ -280,7 +280,7 @@ func PyErr_WriteUnraisable(obj *PyObject) {
 	C.PyErr_WriteUnraisable(topy(obj))
 }
 
-///// exception instances /////
+/// exception instances /////
 
 var (
 	PyExc_BaseException       = togo(C.PyExc_BaseException)
@@ -310,8 +310,8 @@ var (
 	PyExc_SystemExit          = togo(C.PyExc_SystemExit)
 	PyExc_TypeError           = togo(C.PyExc_TypeError)
 	PyExc_ValueError          = togo(C.PyExc_ValueError)
-	//FIXME: this should go into an exceptions_windows.go file
-	//PyExc_WindowsError = togo(C.PyExc_WindowsError)
+	// FIXME: this should go into an exceptions_windows.go file
+	// PyExc_WindowsError = togo(C.PyExc_WindowsError)
 
 	PyExc_ZeroDivisionError = togo(C.PyExc_ZeroDivisionError)
 )

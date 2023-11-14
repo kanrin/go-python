@@ -18,7 +18,7 @@ _gopy_PyObject_CallFunction(PyObject *o, int len, char* pyfmt, void *cargs) {
 
 	if (len > _gopy_max_varargs) {
 			PyErr_Format(
-					PyExc_RuntimeError, 
+					PyExc_RuntimeError,
 					"python: maximum number of varargs (%d) exceeded (%d)",
 					_gopy_max_varargs,
 					len
@@ -69,7 +69,7 @@ _gopy_PyObject_CallMethod(PyObject *o, char *method, int len, char* pyfmt, void 
 
 	if (len > _gopy_max_varargs) {
 			PyErr_Format(
-					PyExc_RuntimeError, 
+					PyExc_RuntimeError,
 					"python: maximum number of varargs (%d) exceeded (%d)",
 					_gopy_max_varargs,
 					len
@@ -117,12 +117,12 @@ _gopy_PyObject_CallMethod(PyObject *o, char *method, int len, char* pyfmt, void 
 
 /* --- dict --- */
 
-int _gopy_PyDict_Check(PyObject *o) { 
-	return PyDict_Check(o); 
+int _gopy_PyDict_Check(PyObject *o) {
+	return PyDict_Check(o);
 }
 
-int _gopy_PyDict_CheckExact(PyObject *o) { 
-	return PyDict_CheckExact(o); 
+int _gopy_PyDict_CheckExact(PyObject *o) {
+	return PyDict_CheckExact(o);
 }
 
 /* --- exceptions --- */
@@ -165,33 +165,33 @@ _gopy_set_PyMethodDef(PyMethodDef *array, int i, PyMethodDef *o) {
 /* --- none --- */
 
 PyObject*
-_gopy_pynone(void) { 
-	return Py_None; 
+_gopy_pynone(void) {
+	return Py_None;
 }
 
 /* --- numeric --- */
 
 int
-_gopy_PyInt_Check(PyObject *o) { 
+_gopy_PyInt_Check(PyObject *o) {
 	return PyInt_Check(o);
 }
 
 int
-_gopy_PyInt_CheckExact(PyObject *o) { 
+_gopy_PyInt_CheckExact(PyObject *o) {
 	return PyInt_CheckExact(o);
 }
 
 long
-_gopy_PyInt_AS_LONG(PyObject *o) { 
+_gopy_PyInt_AS_LONG(PyObject *o) {
 	return PyInt_AS_LONG(o);
 }
 
 int
-_gopy_PyLong_Check(PyObject *o) { 
+_gopy_PyLong_Check(PyObject *o) {
 	return PyLong_Check(o);
 }
 
-int _gopy_PyLong_CheckExact(PyObject *o) { 
+int _gopy_PyLong_CheckExact(PyObject *o) {
 	return PyLong_CheckExact(o);
 }
 
@@ -238,7 +238,7 @@ _gopy_PyComplex_CheckExact(PyObject *o) {
 /* --- otherobjects --- */
 
 int
-_gopy_PyModule_Check(PyObject *p) { 
+_gopy_PyModule_Check(PyObject *p) {
 	return PyModule_Check(p);
 }
 
@@ -390,7 +390,7 @@ _gopy_PyString_Check(PyObject *o) {
 }
 
 Py_ssize_t
-_gopy_PyString_GET_SIZE(PyObject *o) { 
+_gopy_PyString_GET_SIZE(PyObject *o) {
 	return PyString_GET_SIZE(o);
 }
 

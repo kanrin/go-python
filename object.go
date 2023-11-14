@@ -1,6 +1,6 @@
 package python
 
-//#include "go-python.h"
+// #include "go-python.h"
 import "C"
 
 import (
@@ -100,7 +100,7 @@ func int2err(i C.int) error {
 	if i == 0 {
 		return nil
 	}
-	//FIXME: also handle python exceptions ?
+	// FIXME: also handle python exceptions ?
 	return &gopy_err{fmt.Sprintf("error in C-Python (rc=%d)", int(i))}
 }
 
